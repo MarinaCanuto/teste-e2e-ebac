@@ -1,38 +1,18 @@
 /// <reference types="cypress" />
-let dadosLogin
+import loginPage from '../support/page_objects/loginPage'
 
-context('Funcionalidade Login', () => {
-    before(() => {
-        cy.fixture('perfil').then(perfil => {
-            dadosLogin = perfil
-        })
-    });
-
-    beforeEach(() => {
-        cy.visit('minha-conta')
-    });
-
-    afterEach(() => {
-        cy.screenshot()
-    });
-
-    it('Login com sucesso usando Comando customizado', () => {
-        cy.login(dadosLogin.usuario, dadosLogin.senha)
-        cy.get('.page-title').should('contain', 'Minha conta')
-    });
-
-    it('Login usando fixture', () => {
-        cy.fixture('perfil').then((dados) => {
-            cy.login(dados.usuario, dados.senha)
-        })
-        cy.get('.page-title').should('contain', 'Minha conta')
-    });
-
-    it.skip('Deve fazer login com sucesso - sem otimização', () => {
-        cy.get('#username').type(dadosLogin.usuario)
-        cy.get('#password').type(dadosLogin.senha, { log: false })
-        cy.get('.woocommerce-form > .button').click()
-        cy.get('.page-title').should('contain', 'Minha conta')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, aluno_ebac')
+describe('Funcionalidade Login', () => {
+  beforeEach(() => {
+    loginPage.visitar()
+  })
+  it('Deve fazer login com sucesso', () => {
+    cy.fixture('perfil').then(perfil => {
+      loginPage.login(perfil.usuario, perfil.senha)
     })
+    cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, Marina.teste')
+  })
+  it('Deve exibir mensagem de erro com usuário inválido', () => {
+    loginPage.login('email@invalido.com', 'senhaerrada')
+    cy.get('.woocommerce-error').should('contain', 'Endereço de e-mail desconhecido. ')
+  })
 })

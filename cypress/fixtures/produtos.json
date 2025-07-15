@@ -1,0 +1,30 @@
+[
+  {
+    "nomeProduto": "Abominable Hoodie",
+    "slug": "abominable-hoodie",
+    "tamanho": "M",
+    "cor": "Red",
+    "quantidade": 1
+  },
+  {
+    "nomeProduto": "Zeppelin Yoga Pant",
+    "slug": "zeppelin-yoga-pant",
+    "tamanho": "36",
+    "cor": "Green",
+    "quantidade": 1
+  },
+  {
+    "nomeProduto": "Ariel Roll Sleeve Sweatshirt",
+    "slug": "ariel-roll-sleeve-sweatshirt",
+    "tamanho": "M",
+    "cor": "Purple",
+    "quantidade": 1
+  },
+  {
+    "nomeProduto": "Ajax Full-Zip Sweatshirt",
+    "slug": "ajax-full-zip-sweatshirt",
+    "tamanho": "XL",
+    "cor": "Blue",
+    "quantidade": 1
+  }
+]

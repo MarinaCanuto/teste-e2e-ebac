@@ -1,0 +1,11 @@
+{
+  "nome": "Marina",
+  "sobrenome": "Canuto",
+  "endereco": "Rua das Flores 123",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "pais": "Brasil",
+  "cep": "01000-000",
+  "telefone": "11999999999",
+  "email": "marina.teste@teste.com"
+}
