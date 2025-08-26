@@ -1,35 +1,33 @@
 pipeline {
     agent any
 
-    options { timestamps(); skipDefaultCheckout(true) }
-
-    environment {
-        CI = 'true'
-    }
-
     stages {
-        stage('Checkout') {
-            steps { checkout scm }
-        }
-        stage('Instalar dependências') {
-            steps { sh 'npm ci || npm install' }
-        }
-        stage('Testes Cypress (headless)') {
+        stage('Setup') {
             steps {
-                sh '''
-                  npx cypress verify
-                  npx cypress run
-                '''
+                // Puxa o código do repositório
+                git branch: 'main', url: 'https://github.com/MarinaCanuto/teste-e2e-ebac.git'
+                // Instala dependências do Node
+                bat 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Roda os testes Cypress
+                bat '''set NO_COLOR=1
+npm test'''
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'cypress/screenshots/**/*,cypress/videos/**/*', allowEmptyArchive: true
+            echo 'Build finalizado'
+        }
+        success {
+            echo 'Todos os testes passaram!'
         }
         failure {
-            echo 'Falhou 😥 — confira screenshots e vídeos nos artifacts.'
+            echo 'Algum teste falhou!'
         }
     }
 }
