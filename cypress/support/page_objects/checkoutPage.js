@@ -17,8 +17,10 @@ class CheckoutPage {
     cy.get('#place_order').click()
   }
   validarConfirmacao() {
-   cy.get('#main').should('contain', 'Obrigado. Seu pedido foi recebido.')
-  }
+    cy.get('main#main.site-main', { timeout: 10000 })
+      .should('contain', 'Obrigado. Seu pedido foi recebido.')
+}
+
 }
 
 export default new CheckoutPage()
